@@ -1,0 +1,41 @@
+extends layout
+
+block content
+    h1=title
+    .row
+      .col-md-1(style={background: 'darkred'})
+        br
+        a(href='/', style={color:'white'}) &nbsp Return Home
+      .col-md
+        ul
+            li 
+                h4 Calculate Weight Loss
+            form(method="POST" action='/calculateWeightLoss')
+                label Choose a name:&nbsp
+                select(name="user")
+                    each user in users
+                        option(value=user) #{user}
+                label &nbsp&nbsp&nbsp Choose a time span:&nbsp
+                select(name="timeSpan")
+                    option(value="week") Over the past week
+                    option(value="month") Over the past month
+                    option(value="all") Since first record
+                br
+                input(type="submit", value="Calculate")
+
+            li
+                h4 Calculate Latest BMI
+            form(method="POST" action='/calculateBMI')
+                label Choose a name:&nbsp
+                select(name="user")
+                    each user in users
+                        option(value=user) #{user}
+                br
+                input(type="submit", value="Calculate")
+                br
+            hr
+        if flash
+            .alert(style={color:'red'})=flash.message
+            
+             
+        

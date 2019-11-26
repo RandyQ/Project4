@@ -1,0 +1,30 @@
+extends layout
+
+block content
+    h1 All Weight Entries         
+    if flash
+      .alert(style={color:'red'})=flash.message
+    .row 
+      .col-md-1(style={background: 'darkred'})
+        br
+        a(href='/', style={color:'white'}) &nbsp Return Home
+      .col-md
+        br
+        br
+        .row
+            each userGroup in entries
+                .col-lg-2
+                    label #[strong Name: #{userGroup[0].name}]
+                    br
+                    each entry in userGroup
+                        label #[strong &nbsp&nbsp Date: #{entry.date}] &nbsp
+                        a(href=`/edit?name=${entry.name}&weight=${entry.weight}&height=${entry.height}&date=${entry.date}&_id=${entry._id}`)
+                            i.fa.fas.fa-edit
+                        a(href=`/delete?_id=${entry._id}`) &nbsp
+                            i.fa.fas.fa-trash
+                        ul                
+                            li Weight: #{entry.weight} lbs
+                            li Height: #{entry.height} inches
+
+        hr
+                                

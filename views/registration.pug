@@ -1,0 +1,26 @@
+extends layout
+
+block content
+    h1=title
+    if flash
+      .alert(style={color:'red'})=flash.message
+    form(method="POST" action='/register')
+            label Name:
+            br
+            input(type="text", name="name", title="Your name or handle")
+            br
+            label Email:
+            br
+            input(type="text", name="email", title="Email will be your username")
+            br
+            label Password: 
+            br
+            input(type="password", name="password", title="Choose a password")
+            br
+            label Confirm Password:
+            br
+            input(type="password", name="confirmPassword", title="Re-type your password")
+            br
+            input(type="submit", value="Register")
+            br 
+            hr

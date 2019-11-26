@@ -1,4 +1,14 @@
 extends layout
 
 block content
-  h1 Welcome to My Website
+  h1 #{title} 
+  .row 
+      .col-md-1(style={background: 'darkred'})
+        br
+        a(href='/logout', style={color:'white'}, onClick='verify()') &nbsp Logout
+        - 
+      .col-md
+        ul
+          li: a(href='/viewentries') View all entries (edit or delete)
+          li: a(href='/add') Add new entry
+          li: a(href='/functions') WeighTracker functions

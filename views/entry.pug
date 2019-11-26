@@ -1,0 +1,34 @@
+extends layout
+
+block content
+    h1 #{title}         
+    if flash
+      .alert(style={color:'red'})=flash.message
+    .row 
+      .col-md-1(style={background: 'darkred'})
+        br
+        a(href='/', style={color:'white'}) &nbsp Return Home
+      .col-md
+        form(method="POST" action='/add')
+            label Name:
+            br
+            input(type="text", name="name", value=`${name}`)
+            br
+            label Weight:
+            br
+            input(type="text", name="weight", value=`${weight}`)
+            br
+            label Height (in inches): 
+            br
+            input(type="text", name="height", value=`${height}`)
+            br
+            label Date (if other than today): 
+            br
+            input(type="text", name="date", value=`${date}`) 
+            br
+            if _id
+              input(type="hidden", name="_id", value=`${_id}`)
+            br
+            input(type="submit", value="Save")
+            br 
+            hr

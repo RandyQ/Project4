@@ -1,0 +1,19 @@
+extends layout
+
+block content
+    h1=title         
+    if flash
+      .alert(style={color:'red'})=flash.message
+    a(href='/register', title="Register now!") Register an account
+    form(method="POST", action='/login')
+            label Username (email):
+            br
+            input(type="text", name="email", title="Enter your email")
+            br
+            label Password: 
+            br
+            input(type="password", name="password", title="Enter your password")
+            br
+            input(type="submit", value="Login")
+            br 
+            hr
