@@ -6,32 +6,38 @@ block content
       .col-md-1(style={background: 'darkred'})
         br
         a(href='/', style={color:'white'}) &nbsp Return Home
+        br
+        br
+        a(href='/viewentries', style={color:'white'}) &nbsp View Entries
+        br
+        br
+        a(href='/add', style={color:'white'}) &nbsp Add Entry
       .col-md
         ul
             li 
                 h4 Calculate Weight Loss
             form(method="POST" action='/calculateWeightLoss')
                 label Choose a name:&nbsp
-                select(name="user")
+                select(name="user", title='Whose weight change?')
                     each user in users
                         option(value=user) #{user}
                 label &nbsp&nbsp&nbsp Choose a time span:&nbsp
-                select(name="timeSpan")
+                select(name="timeSpan", title='How long back?')
                     option(value="week") Over the past week
                     option(value="month") Over the past month
                     option(value="all") Since first record
                 br
-                input(type="submit", value="Calculate")
+                input(type="submit", value="Calculate", title='Weightloss')
 
             li
                 h4 Calculate Latest BMI
             form(method="POST" action='/calculateBMI')
                 label Choose a name:&nbsp
-                select(name="user")
+                select(name="user", title='Whose BMI?')
                     each user in users
                         option(value=user) #{user}
                 br
-                input(type="submit", value="Calculate")
+                input(type="submit", value="Calculate", title='BMI')
                 br
             hr
         if flash

@@ -8,23 +8,29 @@ block content
       .col-md-1(style={background: 'darkred'})
         br
         a(href='/', style={color:'white'}) &nbsp Return Home
+        br
+        br
+        a(href='/viewentries', style={color:'white'}) &nbsp View Entries
+        br
+        br
+        a(href='/functions', style={color:'white'}) &nbsp Functions
       .col-md
         form(method="POST" action='/add')
             label Name:
             br
-            input(type="text", name="name", value=`${name}`)
+            input(type="text", name="name", value=`${name}`, title='Enter your name')
             br
             label Weight:
             br
-            input(type="text", name="weight", value=`${weight}`)
+            input(type="text", name="weight", value=`${weight}`, title='Weight in lbs')
             br
             label Height (in inches): 
             br
-            input(type="text", name="height", value=`${height}`)
+            input(type="text", name="height", value=`${height}`, title='Height in inches')
             br
             label Date (if other than today): 
             br
-            input(type="text", name="date", value=`${date}`) 
+            input(type="text", name="date", value=`${date}`, title='Change date') 
             br
             if _id
               input(type="hidden", name="_id", value=`${_id}`)

@@ -1,5 +1,3 @@
-// For use of environment variables
-require('dotenv').config();
 const express = require('express');
 const path = require('path');
 
@@ -30,7 +28,7 @@ app.set('port', process.env.PORT || 3000);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Initialize Passport // 
+// Initialize Passport 
 app.use(passport.initialize());
 
 // Require controllers
@@ -48,6 +46,7 @@ app.use((req, res, next) => {
 function isAuthenticated(req, res, next) {
 	if (req.session.authenticated === undefined) {
 		req.session.authenticated = false;
+		res.locals.auth = req.session.authenticated;
 	}
 	if (req.session.authenticated) {
 		return next();
@@ -78,6 +77,7 @@ app.get('/register', auth.registerPage);
 app.get('/login', auth.loginPage);
 app.post('/register', auth.register);
 app.post('/login', auth.login);
+app.get('/logout', auth.logout);
 
 // 404 catch-all handler (middleware)
 app.use(function (req, res, next) {

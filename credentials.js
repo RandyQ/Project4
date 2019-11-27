@@ -1,4 +1,4 @@
-  
+// Credentials for database and session
 module.exports = {
     mongo: {
         development: {
@@ -12,6 +12,6 @@ module.exports = {
         secret: 'rcq1',
         resave: false,
         saveUninitialized: true,
-        cookie: { secure: false } // This needs to be true if in prod under https
+        cookie: { secure: false } 
     }
 };

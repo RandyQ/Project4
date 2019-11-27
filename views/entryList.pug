@@ -8,6 +8,12 @@ block content
       .col-md-1(style={background: 'darkred'})
         br
         a(href='/', style={color:'white'}) &nbsp Return Home
+        br
+        br
+        a(href='/add', style={color:'white'}) &nbsp Add record
+        br
+        br
+        a(href='/functions', style={color:'white'}) &nbsp Functions
       .col-md
         br
         br
@@ -18,9 +24,9 @@ block content
                     br
                     each entry in userGroup
                         label #[strong &nbsp&nbsp Date: #{entry.date}] &nbsp
-                        a(href=`/edit?name=${entry.name}&weight=${entry.weight}&height=${entry.height}&date=${entry.date}&_id=${entry._id}`)
+                        a(href=`/edit?name=${entry.name}&weight=${entry.weight}&height=${entry.height}&date=${entry.date}&_id=${entry._id}`, title='Edit record')
                             i.fa.fas.fa-edit
-                        a(href=`/delete?_id=${entry._id}`) &nbsp
+                        a(href=`/delete?_id=${entry._id}`, title='Delete record') &nbsp
                             i.fa.fas.fa-trash
                         ul                
                             li Weight: #{entry.weight} lbs

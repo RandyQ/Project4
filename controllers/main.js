@@ -25,10 +25,10 @@ module.exports = {
         let redirect;
         if (name && weight && height && date) {
             if (req.body._id) {
-                await weightService.postEditedEntry(name, weight, height, date, _id);
+                await weightService.postEditedEntry(name, weight, height, padDate(date), _id);
                 redirect = "/viewentries";
             } else {
-                await weightService.postEntry(name, weight, height, date);
+                await weightService.postEntry(name, weight, height, padDate(date));
                 redirect = "/add";
             }
 
@@ -43,7 +43,8 @@ module.exports = {
                 message: "You must fill in all fields!"
             };
         }
-        // Redirect the user back to adding a new entry to add another if they like
+        // Redirect the user back to adding a new entry to add another 
+        // if they like, or to view all entries if they are editing
         return res.redirect(303, redirect);
     },
 
@@ -128,7 +129,7 @@ module.exports = {
             // BMI calculation
             BMI = (conversionFactor * latestRecord.weight) / (latestRecord.height * latestRecord.height);
             req.session.flash = {
-                message: req.body.user + "'s BMI is " + BMI.toFixed(2)
+                message: req.body.user + "'s BMI is " + BMI.toFixed(2) + " as of " + latestRecord.date
             };
         } else {
             req.session.flash = {
@@ -187,4 +188,16 @@ function formatDate(date) {
     const yyyy = date.getFullYear();
     let formattedDate = mm + '/' + dd + '/' + yyyy;
     return formattedDate;
+}
+
+// Make sure the date input has two digits for month and day
+function padDate(date) {
+    const month = date.substring(0, date.indexOf('/')).padStart(2, '0');
+    const day = date.substring(date.indexOf('/') + 1, date.lastIndexOf('/')).padStart(2, '0');
+    let adjustedDate = month + '/' + day + date.substring(date.lastIndexOf('/'), date.length);
+    if (adjustedDate.length !== 10) {
+        adjustedDate = adjustedDate.substring(0, 6) + '20' 
+        + adjustedDate.substring(adjustedDate.length - 2, adjustedDate.length);
+    }
+    return adjustedDate;
 }
