@@ -31,7 +31,6 @@ module.exports = {
                 await weightService.postEntry(name, weight, height, padDate(date));
                 redirect = "/add";
             }
-
             // Flash message to inform the user their entry has been saved
             req.session.flash = {
                 message: "Your weight entry has been saved..."
@@ -98,7 +97,7 @@ module.exports = {
         if (req.body.user && req.body.timeSpan) {
             // Find the begin date according to a user's given timespan from current date
             let beginDate = getBeginDate(new Date(), req.body.timeSpan);
-            // Retrieves an object with weight (gain or loss) and the user's earliest date relative to timespan
+            // Retrieves an object with both weight (gain or loss) and the user's earliest date relative to timespan
             weightChange = await weightService.getTotalWeightLoss(req.body.user, formatDate(beginDate));
             if (weightChange.weight <= 0) {
                 req.session.flash = {
@@ -190,7 +189,7 @@ function formatDate(date) {
     return formattedDate;
 }
 
-// Make sure the date input has two digits for month and day
+// Make sure the date input has two digits for month and day and four for year
 function padDate(date) {
     const month = date.substring(0, date.indexOf('/')).padStart(2, '0');
     const day = date.substring(date.indexOf('/') + 1, date.lastIndexOf('/')).padStart(2, '0');

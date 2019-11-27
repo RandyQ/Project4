@@ -72,7 +72,7 @@ app.get('/functions', isAuthenticated, main.functions);
 app.post('/calculateWeightLoss', isAuthenticated, main.calculateWeightLoss);
 app.post('/calculateBMI', isAuthenticated, main.calculateBMI);
 
-// Login and Register routes
+// Login, logout, and Register routes
 app.get('/register', auth.registerPage);
 app.get('/login', auth.loginPage);
 app.post('/register', auth.register);
