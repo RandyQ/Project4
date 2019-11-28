@@ -1,11 +1,17 @@
 # Project4
 
 This is project 4 for COP3813 (serverside programming).
+https://project-4-randyq.herokuapp.com/ is the deployed app address
 
-To gain admin functionality (the ability to delete a record) log in as 
-"email": 'admin'
+To gain admin functionality (the ability to delete a record) log in as: 
+"email": 'admin',
 "password": 'admin'
 (for grading purposes)
+
+Otherwise, just register as a new user and log in!  
+Or you can also just use:
+"email": 'Adam@gmail.com',
+"password": 'adam'
 
 credentials.js are included to ensure app works appropriately when grading
 
