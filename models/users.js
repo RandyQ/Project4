@@ -14,6 +14,10 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    admin: {
+        type: Boolean,
+        default: false
+    },
     hash: String,
     salt: String
 });

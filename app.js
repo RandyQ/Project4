@@ -42,35 +42,25 @@ app.use((req, res, next) => {
 	next();
 });
 
-// Middleware function to restrict users from pages unless authenticated
-function isAuthenticated(req, res, next) {
-	if (req.session.authenticated === undefined) {
-		req.session.authenticated = false;
-		res.locals.auth = req.session.authenticated;
-	}
-	if (req.session.authenticated) {
-		return next();
-	} else {
-		res.redirect('/login');
-	}
-};
+// Custom middleware for authentication and authorization
+const mware = require('./lib/middleware');
 
 // Home
-app.get('/', isAuthenticated, main.home);
+app.get('/', mware.isAuthenticated, main.home);
 
 // Add new entry page
-app.get('/add', isAuthenticated, main.addEntry);
-app.post('/add', isAuthenticated, main.postEntry);
+app.get('/add', mware.isAuthenticated, main.addEntry);
+app.post('/add', mware.isAuthenticated, main.postEntry);
 
 // View all entries page with edit and delete routes
-app.get('/viewentries', isAuthenticated, main.viewEntries);
-app.get('/edit', isAuthenticated, main.editEntry);
-app.get('/delete', isAuthenticated, main.deleteEntry);
+app.get('/viewentries', mware.isAuthenticated, main.viewEntries);
+app.get('/edit', mware.isAuthenticated, main.editEntry);
+app.get('/delete', mware.requireAdmin, main.deleteEntry);
 
 // Weight loss function routes
-app.get('/functions', isAuthenticated, main.functions);
-app.post('/calculateWeightLoss', isAuthenticated, main.calculateWeightLoss);
-app.post('/calculateBMI', isAuthenticated, main.calculateBMI);
+app.get('/functions', mware.isAuthenticated, main.functions);
+app.post('/calculateWeightLoss', mware.isAuthenticated, main.calculateWeightLoss);
+app.post('/calculateBMI', mware.isAuthenticated, main.calculateBMI);
 
 // Login, logout, and Register routes
 app.get('/register', auth.registerPage);

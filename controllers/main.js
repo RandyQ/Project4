@@ -10,7 +10,7 @@ module.exports = {
     addEntry: function (req, res) {
         res.render('entry', {
             title: "Add New Weight Entry",
-            name: "",
+            name: req.session.user.name,
             weight: "",
             height: "",
             // Date is a string in order to display proper format

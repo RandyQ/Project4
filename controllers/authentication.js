@@ -51,6 +51,7 @@ const login = function (req, res) {
         } 
         if (user) {
             req.session.authenticated = true;
+            req.session.user = user;
             res.redirect('/');
         } else {
             req.session.flash = {

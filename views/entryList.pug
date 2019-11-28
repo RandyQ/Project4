@@ -26,7 +26,7 @@ block content
                         label #[strong &nbsp&nbsp Date: #{entry.date}] &nbsp
                         a(href=`/edit?name=${entry.name}&weight=${entry.weight}&height=${entry.height}&date=${entry.date}&_id=${entry._id}`, title='Edit record')
                             i.fa.fas.fa-edit
-                        a(href=`/delete?_id=${entry._id}`, title='Delete record') &nbsp
+                        a(href=`/delete?_id=${entry._id}&name=${entry.name}`, title='Delete record') &nbsp
                             i.fa.fas.fa-trash
                         ul                
                             li Weight: #{entry.weight} lbs
